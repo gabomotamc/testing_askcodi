@@ -1,0 +1,24 @@
+Create script for add in my api laravel project. Considerate the next and but you can add
+another recomendations:
+
+Create a new migration class called "countries_table", and the table called "countries",
+the "up" method contain the nexts columns:
+"id" (is autoincremental big integer),"status" (is a string),"name"(is a string),"iso_2" (is a string),	"iso_3" (is a string), "phone_prefix" (is a string),
+"currency_name" (is a string), "currency_alpha3" (is a string), "latitude" (is a string),"longitude" (is a string), "capital" (is a string),
+"region" (is a string), "subregion" (is a string),"relevancy" (is a integer can be null),
+"usage_count" (is a integer can be null),
+"created_at" (is a datatime),"updated_at" (is a datatime),"deleted_at" (is a datatime)
+the "down" method delete all columns.
+
+Create a new MODEL class, called Country, and declared "table" variable 
+with the value "countries"
+Declarared a array with all colunms of database created in the migration class.
+
+Create a a new controller class called CountryController, create a method called "allCountries"
+into the CountryController. The method getCountries, get all countries using the Country class model with the static
+method "all", the value returned save in a variable called "countries", and the variable
+"countries" is passed in a json return.
+
+Create grouping route with prefix named "api/v1". Into the grouping route, create a route
+with HTTP method type GET the name os the route is "all-countries", and the route
+used the CountryController with the method allCountries.

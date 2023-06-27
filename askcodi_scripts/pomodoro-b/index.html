@@ -1,0 +1,232 @@
+<!-- 
+  #Petição
+  
+Create script app pomodor timer with responsive html5 with style css3 into the head and javascript, design of the website like facebook
+To run and used the next javascript script:
+// Get the elements
+const timerDisplay = document.querySelector('.timer-display');
+const startButton = document.querySelector('.start-button');
+const pauseButton = document.querySelector('.pause-button');
+const resetButton = document.querySelector('.reset-button');
+
+// Set the default values for the timer
+let time = 1500; // 25 minutes in seconds
+let isPaused = true;
+let timerInterval;
+
+// Format the time into minutes and seconds
+function formatTime(totalSeconds) {
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+// Display the time on the page
+function displayTime() {
+  timerDisplay.textContent = formatTime(time);
+}
+
+// Start the timer
+function startTimer() {
+  isPaused = false;
+  timerInterval = setInterval(() => {
+    time--;
+    if (time === 0) {
+      clearInterval(timerInterval);
+      alert('Time is up!');
+    }
+    displayTime();
+  }, 1000);
+}
+
+// Pause the timer
+function pauseTimer() {
+  isPaused = true;
+  clearInterval(timerInterval);
+}
+
+// Reset the timer
+function resetTimer() {
+  time = 1500; // 25 minutes in seconds
+  isPaused = true;
+  clearInterval(timerInterval);
+  displayTime();
+}
+
+// Add event listeners to the buttons
+startButton.addEventListener('click', startTimer);
+pauseButton.addEventListener('click', pauseTimer);
+resetButton.addEventListener('click', resetTimer);
+
+// Display the starting time on the page
+displayTime();
+
+-->
+
+<!-- 
+#Resposta
+
+To create a Pomodoro timer app with responsive HTML5 and CSS3, you can start by writing the HTML structure which includes a header, main content, and footer. Here is an example of the HTML code:
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pomodoro Timer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+  <header>
+    <h1>Pomodoro Timer</h1>
+  </header>
+  <main>
+    <div class="timer-display">25:00</div>
+    <div class="buttons">
+      <button class="start-button">Start</button>
+      <button class="pause-button">Pause</button>
+      <button class="reset-button">Reset</button>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2021 Pomodoro Timer App</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
+
+<style>
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #3B5998;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+  
+  .timer-display {
+    background-color: #fff;
+    border: 3px solid #3B5998;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .buttons {
+    display: flex;
+  }
+  
+  button {
+    background-color: #3B5998;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #fff;
+    color: #3B5998;
+    border: 3px solid #3B5998;
+  }
+</style>  
+
+<script>
+    // Get the elements
+const timerDisplay = document.querySelector('.timer-display');
+const startButton = document.querySelector('.start-button');
+const pauseButton = document.querySelector('.pause-button');
+const resetButton = document.querySelector('.reset-button');
+
+// Set the default values for the timer
+let time = 1500; // 25 minutes in seconds
+let isPaused = true;
+let timerInterval;
+
+// Format the time into minutes and seconds
+function formatTime(totalSeconds) {
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+// Display the time on the page
+function displayTime() {
+  timerDisplay.textContent = formatTime(time);
+}
+
+// Start the timer
+function startTimer() {
+  isPaused = false;
+  timerInterval = setInterval(() => {
+    time--;
+    if (time === 0) {
+      clearInterval(timerInterval);
+      alert('Time is up!');
+    }
+    displayTime();
+  }, 1000);
+}
+
+// Pause the timer
+function pauseTimer() {
+  isPaused = true;
+  clearInterval(timerInterval);
+}
+
+// Reset the timer
+function resetTimer() {
+  time = 1500; // 25 minutes in seconds
+  isPaused = true;
+  clearInterval(timerInterval);
+  displayTime();
+}
+
+// Add event listeners to the buttons
+startButton.addEventListener('click', startTimer);
+pauseButton.addEventListener('click', pauseTimer);
+resetButton.addEventListener('click', resetTimer);
+
+// Display the starting time on the page
+displayTime();
+
+</script>
+
+<!--
+
+    This code uses JavaScript to interact with the HTML elements and create the timer functionality. The startTimer function uses the setInterval method to decrease the time by 1 second every second until it reaches 0. When the time is up, it stops the interval and shows an alert message. The functions pauseTimer and resetTimer stop the timer and reset it to the starting time, respectively. Finally, the displayTime 
+    function is responsible for showing the time on the page in the timer-display element.
+-->

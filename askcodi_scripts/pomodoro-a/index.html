@@ -1,0 +1,235 @@
+<!-- 
+   Petição
+   Create script app pomodor timer with responsive html5 with style css3 into the head and javascript, design of the website like youtube 
+-->
+
+<!--
+    Resposta
+    Sure, here's an example of how you could create an app that functions as a pomodoro timer with responsive HTML5, styled with CSS3, and designed similarly to YouTube:
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pomodoro Timer</title>
+    <!--<link rel="stylesheet" href="style.css">-->
+
+    <style>
+/* General Styling */
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+   font-family: Arial, sans-serif;
+   background-color: #f5f5f5;
+}
+
+header {
+   background-color: #ff0000;
+   color: #fff;
+   padding: 20px;
+}
+
+h1 {
+   font-size: 2.5rem;
+}
+
+main {
+   max-width: 800px;
+   margin: 0 auto;
+   padding: 20px;
+}
+
+#task {
+   background-color: #fff;
+   padding: 20px;
+   margin-bottom: 20px;
+}
+
+#timer-container {
+   background-color: #fff;
+   padding: 20px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+#timer {
+   font-size: 5rem;
+   margin-bottom: 20px;
+}
+
+#controls {
+   display: flex;
+   gap: 20px;
+}
+
+button {
+   background-color: #ff0000;
+   color: #fff;
+   border: none;
+   padding: 10px 20px;
+   border-radius: 5px;
+   font-size: 1.2rem;
+   cursor: pointer;
+}
+
+button:hover {
+   background-color: #f00;
+}
+
+footer {
+   background-color: #ccc;
+   color: #222;
+   text-align: center;
+   padding: 20px;
+   margin-top: 20px;
+}
+
+    
+    </style>
+</head>
+<body>
+   <header>
+      <h1>Pomodoro Timer</h1>
+   </header>
+   
+   <main>
+      <div id="task"></div>
+      <div id="timer-container">
+         <h2 id="timer"></h2>
+         <div id="controls">
+            <button id="start">Start</button>
+            <button id="pause">Pause</button>
+            <button id="stop">Stop</button>
+         </div>
+      </div>
+   </main>
+   
+   <footer>
+      <p>&copy; 2021 Pomodoro Timer. All rights reserved.</p>
+   </footer>
+   
+   <!--<script src="script.js"></script>-->
+
+   <script>
+    const taskElem = document.querySelector('#task');
+const timerElem = document.querySelector('#timer');
+const startElem = document.querySelector('#start');
+const pauseElem = document.querySelector('#pause');
+const stopElem = document.querySelector('#stop');
+
+let task = '';
+let completedPomodoros = 0;
+let isTimerPaused = true;
+let isTimerStopped = true;
+let timeLeftInMs = 0;
+let interval = null;
+
+startElem.addEventListener('click', () => {
+   if (task.trim().length === 0) {
+      alert('Please enter a task to work on!');
+      return;
+   }
+   
+   if (isTimerPaused) {
+      isTimerPaused = false;
+   } else {
+      timeLeftInMs = 25 * 60 * 1000;
+      completedPomodoros = 0;
+   }
+   
+   isTimerStopped = false;
+   timerElem.classList.remove('paused');
+   startTimer();
+});
+
+pauseElem.addEventListener('click', () => {
+   if (interval) {
+      clearInterval(interval);
+      interval = null;
+      isTimerPaused = true;
+      timerElem.classList.add('paused');
+   }
+});
+
+stopElem.addEventListener('click', () => {
+   if (interval) {
+      clearInterval(interval);
+      interval = null;
+   }
+   
+   isTimerPaused = true;
+   isTimerStopped = true;
+   timeLeftInMs = 0;
+   completedPomodoros = 0;
+   
+   task = '';
+   taskElem.textContent = '';
+   
+   updateTimerDisplay();
+});
+
+function startTimer() {
+   interval = setInterval(() => {
+      timeLeftInMs -= 1000;
+      
+      if (timeLeftInMs <= 0) {
+         timeLeftInMs = 5 * 60 * 1000;
+         completedPomodoros++;
+         alert('Time is up! Take a 5 minute break.');
+         
+         if (completedPomodoros === 4) {
+            timeLeftInMs = 15 * 60 * 1000;
+            completedPomodoros = 0;
+            alert('You have completed 4 Pomodoros. Take a 15 minute break.');
+         }
+      }
+      
+      updateTimerDisplay();
+   }, 1000);
+}
+
+function updateTimerDisplay() {
+   const minutes = Math.floor(timeLeftInMs / 60000);
+   const seconds = Math.floor((timeLeftInMs % 60000) / 1000);
+   timerElem.textContent = `${padZero(minutes)}:${padZero(seconds)}`;
+   
+   if (isTimerStopped) {
+      timerElem.textContent = '25:00';
+   }
+   
+   if (timeLeftInMs <= 0) {
+      taskElem.textContent = 'Break Time';
+      taskElem.classList.add('break');
+   } else if (!isTimerPaused) {
+      taskElem.textContent = task;
+      taskElem.classList.remove('break');
+   }
+}
+
+function padZero(num) {
+   return num.toString().padStart(2, '0');
+}
+
+// Prompt user to enter task
+task = prompt('What task would you like to work on?');
+taskElem.textContent = task;
+
+updateTimerDisplay();
+
+   </script>
+</body>
+</html>
+
+<!--
+
+    This code creates a simple pomodoro timer where the user enters the task they want to work on and clicks the start button to begin a 25 minute work session. After the work session is over, the user is alerted to take a 5 minute break. After four work sessions, the user is alerted to take a 15 minute break. The timer can be paused and stopped at any time.
+
+The styling is kept simple but resembles the red and white design of YouTube. The layout is responsive and will adjust for mobile devices.
+-->

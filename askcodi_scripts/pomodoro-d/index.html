@@ -1,0 +1,313 @@
+<!--
+#Petição 2
+
+Create script app pomodor timer with responsive html5 with style css3 into the head and javascript, design of the website like xbox
+To run and used the next javascript script:
+
+//Here is the code implementation for the app pomodoro timer:
+
+// function to validate work input and run timer
+function work() {
+  let workInput = document.getElementById("work-input");
+  let workBtn = document.getElementById("work-btn");
+  if (isNaN(workInput.value) || workInput.value < 15 || workInput.value > 60) {
+    alert("Please type a value between 15 and 60");
+    return;
+  }
+  runTimer(workInput.value);
+  changeBgColor("timer-div", "green");
+}
+
+// function to validate break input and stop timer
+function breakFn() {
+  let breakInput = document.getElementById("break-input");
+  let breakBtn = document.getElementById("break-btn");
+  if(isNaN(breakInput.value) || breakInput.value < 15) {
+    alert("Please enter a value of at least 15");
+    return;
+  }
+  stopTimer(breakInput.value);
+  changeBgColor("timer-div", "red");
+}
+
+// function to run timer
+function runTimer(time) {
+  let timer = document.getElementById("timer-div");
+  let countdown = new Date(new Date().getTime() + time * 60 * 1000);
+  let interval = setInterval(function() {
+    let currTime = new Date().getTime();
+    let diff = countdown - currTime;
+    let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    if (diff <= 0) {
+      clearInterval(interval);
+      timer.innerHTML = "00:00";
+      alert("Time's up!");
+    } else {
+      timer.innerHTML = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+    }
+  }, 1000);
+}
+
+// function to change background color
+function changeBgColor(parent, color) {
+  document.getElementById(parent).style.backgroundColor = color;
+}
+
+// add click event listener to work button
+document.getElementById("work-btn").addEventListener("click", function() {
+  work();
+});
+
+// add click event listener to break button
+document.getElementById("break-btn").addEventListener("click", function() {
+  breakFn();
+});
+
+-->
+
+<!-- 
+#Resposta
+Sure, here is the implementation of the script app pomodoro timer with responsive HTML5 and CSS3 style like Xbox.
+First, let's create the HTML5 structure for the timer:
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Xbox Pomodoro Timer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500|Rubik:500,700&display=swap">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  
+  <body>
+    <div class="timer-container">
+      <h1 class="timer-heading">Pomodoro Timer</h1>
+      <div class="timer-box" id="timer-div">25:00</div>
+      <div class="timer-buttons">
+        <button id="work-btn">Start Work</button>
+        <button id="break-btn">Take a Break</button>
+      </div>
+      <div class="timer-input">
+        <label for="work-input">Work Time (Minutes):</label>
+        <input type="number" id="work-input" min="15" max="60" step="1" value="25">
+        <label for="break-input">Break Time (Minutes):</label>
+        <input type="number" id="break-input" min="15" step="1" value="5">
+      </div>
+    </div>
+    
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<!--
+
+
+As you can see, we have specified classes and IDs for the different elements of the timer. We have also linked the style.css and script.js files in the head of the HTML document.
+
+Now, let's move to the CSS3 styling for the timer:
+-->
+
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
+}
+
+body {
+  background-color: #0f0f0f;
+}
+
+.timer-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background-color: #0c0c0c;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px #000;
+}
+
+.timer-heading {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 3px 3px #000;
+}
+
+.timer-box {
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #141414;
+  border-radius: 50%;
+  box-shadow: inset 5px 5px 10px #000, 
+              inset -5px -5px 10px #282828;
+  text-shadow: 3px 3px #000;
+}
+
+.timer-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.timer-buttons button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #4464ad;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px #000;
+  text-shadow: 1px 1px #000;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.timer-buttons button:hover {
+  transform: scale(1.1);
+  background-color: #7fb7ff;
+}
+
+.timer-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer-input label {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #fff;
+  margin: 10px;
+}
+
+.timer-input input {
+  width: 50px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px #000;
+  transition: all 0.2s ease-in-out;
+}
+
+.timer-input input:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 480px) {
+  .timer-box {
+    font-size: 3.5rem;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .timer-buttons button {
+    padding: 5px 10px;
+    font-size: 1rem;
+  }
+  
+  .timer-input label {
+    font-size: 1rem;
+  }
+  
+  .timer-input input {
+    width: 30px;
+    font-size: 1rem;
+  }
+}
+
+</style>
+
+<!--
+The CSS3 code provides the design we wanted, with a dark background color, the title heading is white, placed in the center of the web page, and with a halo shadow effect. The timer itself appears as a circular box, with the current time displayed in the center, surrounded by time input fields and button controls, both for starting/stopping work/break sessions.
+
+Finally, here is the implementation of the JavaScript code in the script.js file for the pomodoro timer:
+
+-->
+
+<script>
+
+function work() {
+  let workInput = document.getElementById("work-input");
+  let workBtn = document.getElementById("work-btn");
+  if (isNaN(workInput.value) || workInput.value < 15 || workInput.value > 60) {
+    alert("Please type a value between 15 and 60");
+    return;
+  }
+  runTimer(workInput.value);
+  changeBgColor("timer-div", "green");
+}
+
+// function to validate break input and stop timer
+function breakFn() {
+  let breakInput = document.getElementById("break-input");
+  let breakBtn = document.getElementById("break-btn");
+  if(isNaN(breakInput.value) || breakInput.value < 15) {
+    alert("Please enter a value of at least 15");
+    return;
+  }
+  stopTimer(breakInput.value);
+  changeBgColor("timer-div", "red");
+}
+
+// function to run timer
+function runTimer(time) {
+  let timer = document.getElementById("timer-div");
+  let countdown = new Date(new Date().getTime() + time * 60 * 1000);
+  let interval = setInterval(function() {
+    let currTime = new Date().getTime();
+    let diff = countdown - currTime;
+    let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    if (diff <= 0) {
+      clearInterval(interval);
+      timer.innerHTML = "00:00";
+      alert("Time's up!");
+    } else {
+      timer.innerHTML = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+    }
+  }, 1000);
+}
+
+// function to change background color
+function changeBgColor(parent, color) {
+  document.getElementById(parent).style.backgroundColor = color;
+}
+
+// add click event listener to work button
+document.getElementById("work-btn").addEventListener("click", function() {
+  work();
+});
+
+// add click event listener to break button
+document.getElementById("break-btn").addEventListener("click", function() {
+  breakFn();
+});
+</script>
